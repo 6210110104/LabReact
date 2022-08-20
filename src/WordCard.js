@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import _, { attempt } from 'lodash';
 
 import CharacterCard from "./CharacterClass";
+import { type } from "@testing-library/user-event/dist/type";
 
 const prepareStateFromWord = given_word => {
     let word = given_word.toUpperCase()
@@ -21,7 +22,7 @@ export default function WordCard(props){
     const [state, setState] = useState(prepareStateFromWord(props.value))
     
     const activationHandler = c => {
-       // document.write(`${c} has been activated`)
+       console.log(`${c} has been activated`)
 
         let guess = state.guess + c
         setState({...state, guess})
@@ -30,6 +31,7 @@ export default function WordCard(props){
             if(guess == state.word){
                 document.write('yeah!')
                 setState({...state, completed: true})
+                
             }else{
                 document.write('reset, next attempt')
                 setState({...state, guess: '', attempt: state.attempt + 1})
@@ -43,31 +45,34 @@ export default function WordCard(props){
                     <CharacterCard value = {c} key={i} activationHandler={activationHandler} attempt={state.attempt}/>)
             }
         </div>
-    )
-
-function setText(textWord) {
-    const activeText = c => {
-    let text = state.text + c
-    setState({...state, text})
-
-    if(text.length == state.word.length){
-        if(text == state.word){
-            document.write("Yeah");
-            setState({...state, completed: true})
-        }else{
-            document.write('reset, next attempt')
-            setState({...state, text: '', attempt: state.attempt + 1})
+    ) 
+    function SetText(props) {
+       
+        const activeText = c => {
+        console.log(`${c} has been activated`)
+        
+        var text = prompt();
+        setState({...state, text})
+    
+        
+    
+        if(text.length == state.word.length){
+            if(text == state.word){
+                document.write("Yeah");
+                setState({...state, completed: true})
+            }else{
+                document.write('reset, next attempt')
+                setState({...state, text: '', attempt: state.attempt + 1})
+            }
         }
     }
+    return (
+        <div>
+            {
+                state.chars.map((c, i) => 
+                <CharacterCard value = {c} key={i} activationHandler={activationHandler} attempt={state.attempt}/>)
+            }
+        </div>
+    )
 }
-return (
-    <div>
-        {
-            state.chars.map((c, i) => 
-                <CharacterCard value = {c} key={i} activeText={activeText} attempt={state.attempt}/>)
-        }
-    </div>
-)
-}
-    
 }
