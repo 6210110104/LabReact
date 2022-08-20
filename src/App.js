@@ -13,7 +13,9 @@ function App() {
         <WordCard value = {word}/>
       }
       <p>
+        Guess the word:
         {textInput}
+        <input type="submit" value="Submit"/>
       </p>
     </div>
   );
