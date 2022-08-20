@@ -4,7 +4,7 @@ import './App.css';
 import CharacterCard from './CharacterClass';
 import WordCard from './WordCard';
 
-var word = "Hello"
+var word = "World"
 function App() {
   const textInput = <input type="text"/>;
   return (
