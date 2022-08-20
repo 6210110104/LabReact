@@ -45,34 +45,29 @@ export default function WordCard(props){
         </div>
     )
 
-  /*  const activeInput = c => {
+function setText(textWord) {
+    const activeText = c => {
+    let text = state.text + c
+    setState({...state, text})
 
-        let text = state.text + c
-        setState({...state, text})
-
-        if(text.length == state.word.length){
-            if(text == state.word){
-                <p>
-                   ('yeah!') 
-                </p>
-                setState({...state, completed: true})
-            }else{
-                <p>
-                    ('reset, next attempt')
-                </p>
-                setState({...state, text: '', attempt: state.attempt + 1})
-            }
+    if(text.length == state.word.length){
+        if(text == state.word){
+            console.log('yeah!')
+            setState({...state, completed: true})
+        }else{
+            console.log('reset, next attempt')
+            setState({...state, text: '', attempt: state.attempt + 1})
         }
     }
-    return (
-        <div>
-            {
-                state.chars.map((c, i) => 
-                    <CharacterCard value = {c} key={i} activeInput={activeInput} attempt={state.attempt}/>)
-            }
-        </div>
-    )
-*/
-
+}
+return (
+    <div>
+        {
+            state.chars.map((c, i) => 
+                <CharacterCard value = {c} key={i} activeText={activeText} attempt={state.attempt}/>)
+        }
+    </div>
+)
+}
     
 }
